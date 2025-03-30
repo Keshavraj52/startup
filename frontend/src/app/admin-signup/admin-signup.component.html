@@ -1,0 +1,36 @@
+
+
+
+<div class="background">
+  <div class="plus-sign">+</div>
+  <!-- Doctor silhouette as SVG for better scaling -->
+
+</div>
+
+<div class="login-container">
+  <h2>Admin Signup</h2>
+
+<form [formGroup]="signupForm" (ngSubmit)="signup()">
+  <label>Name:</label>
+  <input formControlName="name" placeholder="Enter your name" required>
+
+  <label>Email:</label>
+  <input formControlName="email" type="email" placeholder="Enter your email" required>
+
+  <label>Password:</label>
+  <input formControlName="password" type="password" placeholder="Enter password" required>
+
+  <label>Blood Bank Name:</label>
+  <input formControlName="bloodBankName" placeholder="Enter blood bank name" required>
+
+  <label>Location:</label>
+  <input formControlName="location" placeholder="Enter location" required>
+
+  <label>Contact:</label>
+  <input formControlName="contact" placeholder="Enter contact number" required>
+
+  <button type="submit">Signup</button>
+</form>
+
+<p>Already have an account? <a routerLink="/admin/login">Login here</a></p>
+</div>

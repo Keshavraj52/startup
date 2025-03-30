@@ -1,0 +1,56 @@
+<div class="login-container">
+  <div class="background">
+    <div class="plus-sign">+</div>
+    <svg class="doctor-silhouette" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Doctor silhouette -->
+      <path d="M50,0 C60,0 65,5 65,15 C65,25 60,35 50,35 C40,35 35,25 35,15 C35,5 40,0 50,0 Z" fill="#333"/>
+      <path d="M30,35 L70,35 L70,70 L80,120 L65,120 L60,140 L50,100 L40,140 L35,120 L20,120 L30,70 Z" fill="#333"/>
+      <path d="M35,120 L40,180 L45,180 L45,140 L50,100 L55,140 L55,180 L60,180 L65,120 Z" fill="#333"/>
+    </svg>
+  </div>
+  <div class="login-particles">
+    <div class="login-particle"></div>
+    <div class="login-particle"></div>
+    <div class="login-particle"></div>
+  </div>
+
+<div class="register-container">
+  <div class="register-wrapper">
+      <div class="register-header">
+          <h2>Create Account</h2>
+          <p>Join our community and get started</p>
+      </div>
+      <form (ngSubmit)="register()" #registerForm="ngForm" class="register-form">
+          <div class="input-row">
+              <div class="input-container">
+                  <input type="text" name="name" [(ngModel)]="user.name" required placeholder="Full Name" class="register-input">
+              </div>
+              <div class="input-container">
+                  <input type="date" name="birthdate" [(ngModel)]="user.birthdate" required class="register-input">
+              </div>
+          </div>
+          <div class="input-row">
+              <div class="input-container">
+                  <input type="text" name="phone" [(ngModel)]="user.phone" required placeholder="Phone Number" class="register-input">
+              </div>
+              <div class="input-container">
+                  <input type="email" name="email" [(ngModel)]="user.email" required placeholder="Email Address" class="register-input">
+              </div>
+          </div>
+          <div class="input-container">
+              <select [(ngModel)]="user.bloodGroup" name="bloodGroup" required class="register-input">
+                  <option value="" disabled>Select Blood Group</option>
+                  <option *ngFor="let bg of bloodGroups" [value]="bg">{{ bg }}</option>
+              </select>
+          </div>
+          <div class="input-container">
+              <input type="password" name="password" [(ngModel)]="user.password" required placeholder="Create Password" class="register-input">
+          </div>
+          <button type="submit" [disabled]="registerForm.invalid" class="register-button">Create Account</button>
+      </form>
+      <div class="login-section">
+          <p>Already have an account? <a routerLink="/login" class="login-link">Log in</a></p>
+      </div>
+  </div>
+</div>
+  </div>

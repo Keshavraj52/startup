@@ -1,0 +1,9 @@
+<h2>Available Blood Banks</h2>
+
+<ul>
+  <li *ngFor="let bank of bloodBanks">
+    <h3>{{ bank.bloodBankName }}</h3>
+    <p><strong>Location:</strong> {{ bank.location }}</p>
+    <p><strong>Contact:</strong> {{ bank.contact }}</p>
+  </li>
+</ul>

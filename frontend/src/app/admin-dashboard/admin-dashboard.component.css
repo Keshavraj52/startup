@@ -1,0 +1,22 @@
+h2 {
+    text-align: center;
+    color: #d32f2f;
+  }
+  
+  div {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  button {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+  }
+  

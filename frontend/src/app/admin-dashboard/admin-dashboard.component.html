@@ -1,0 +1,11 @@
+<h2>Admin Dashboard</h2>
+
+<div *ngIf="adminData">
+  <p><strong>Name:</strong> {{ adminData.name }}</p>
+  <p><strong>Email:</strong> {{ adminData.email }}</p>
+  <p><strong>Blood Bank Name:</strong> {{ adminData.bloodBankName }}</p>
+  <p><strong>Location:</strong> {{ adminData.location }}</p>
+  <p><strong>Contact:</strong> {{ adminData.contact }}</p>
+</div>
+
+<button (click)="logout()">Logout</button>
