@@ -29,7 +29,79 @@ const AdminSchema = new mongoose.Schema({
   location: String,
   contact: String,
 });
+//// bloodbank management
 
+// ✅ Define Blood Component Schema
+const bloodComponentSchema = new mongoose.Schema({
+  name: String,
+  units: Number,
+  bloodBankId: { type: mongoose.Schema.Types.ObjectId, ref: "Admin" }
+});
+
+const BloodComponent = mongoose.model("BloodComponent", bloodComponentSchema);
+
+// ✅ Middleware for JWT Authentication
+function authenticateToken(req, res, next) {
+  const token = req.header("Authorization");
+  if (!token) return res.status(401).json({ error: "Access Denied! No token provided." });
+
+  try {
+    const verified = jwt.verify(token.replace("Bearer ", ""), process.env.JWT_SECRET);
+    req.user = verified;
+    next();
+  } catch (err) {
+    res.status(403).json({ error: "Invalid token!" });
+  }
+}
+
+// ✅ Admin Routes for Blood Component Management
+app.post("/admin/components", authenticateToken, async (req, res) => {
+  if (req.user.userType !== "admin") return res.status(403).json({ error: "Access Denied!" });
+
+  try {
+    const component = new BloodComponent(req.body);
+    await component.save();
+    res.status(201).json(component);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+app.put("/admin/components/:id", authenticateToken, async (req, res) => {
+  if (req.user.userType !== "admin") return res.status(403).json({ error: "Access Denied!" });
+
+  try {
+    const component = await BloodComponent.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(component);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+app.delete("/admin/components/:id", authenticateToken, async (req, res) => {
+  if (req.user.userType !== "admin") return res.status(403).json({ error: "Access Denied!" });
+
+  try {
+    await BloodComponent.findByIdAndDelete(req.params.id);
+    res.json({ message: "Component deleted" });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// ✅ User Route to View Available Blood Components
+app.get("/components/:bloodBankId", authenticateToken, async (req, res) => {
+  try {
+    const components = await BloodComponent.find({ bloodBankId: req.params.bloodBankId });
+    res.json(components);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+
+
+///
 const Admin = mongoose.model("Admin", AdminSchema);
 
 // ✅ Define User Schema
